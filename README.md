@@ -8,7 +8,7 @@ To get the project up and running on your own local machine, simply follow these
 
 ### Prerequisites
 
-This project is based on Google's Firebase. As such, you will first need to have install Node.js and npm on your computer. See: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+This project is based on Google's Firebase. As such, you will first need to have install Node.js and npm on your system. See: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
 After installing Node, you will need to install Google's Firebase-tools. I recommend a global install using the following command-line instruction:
 
@@ -18,13 +18,31 @@ npm install -g firebase-tools
 
 ## Deployment
 
-Clone the repository to your local system and cd into the SimpleChat directory.
+Clone the repository to your local system and cd into the SimpleChat/functions directory.
 
 ```
-cd SimpleChat
+cd SimpleChat/functions
 ```
-Use Firebase's CLI to host a local server
+Install Node dependencies
+```
+npm install
+```
+cd back into the SimpleChat directory
 
+```
+cd ..
+```
+Log in with a shared google account
+
+```
+firebase login
+```
+
+Use the following credentials to login
+* **Username**: shareddev123@gmail.com
+* **Password**: SharedDev1
+
+Back in the command-line, host the firebase server
 ```
 firebase serve
 ```
@@ -48,6 +66,6 @@ If you don't want to host locally, you can also access the product directly by g
 
 ## Bugs and TODOs
 
-When making a post containing an illegal word, the server will first create the post, inform all users about the post, trigger a cloud-function to edit the post and then inform all users again. In the future, creating posts should probably be done through http requests with an attached cloud-function trigger.
+* When making a post containing an illegal word, the server will first create the post, inform all users about the post, trigger a cloud-function to edit the post and then inform all users again. In the future, creating posts should probably be done through http requests with an attached cloud-function trigger.
 
-No attention has been paid to either design and security in this project.
+* No attention has been paid to either design and security in this project.
