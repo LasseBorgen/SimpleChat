@@ -8,7 +8,6 @@ function initChat(user) {
 
     postsCollection.onSnapshot(snapshot => { //TODO---Error handling
         posts = []
-        console.log(snapshot.docChanges())
         snapshot.forEach(doc => {
             const data = doc.data()
             posts.push({
@@ -32,12 +31,8 @@ function onSubmit(postsCollection) {
             content: document.querySelector('#message-input').value,
             id: postId
         })
-        .then(function () {
-            console.log('Post success!')
-        })
-        .catch(function (error) { //TODO---PROPER Error handling
-            console.error('Post failure: ', error)
-        })
+        .then(() => console.log('Post success!'))
+        .catch(error => console.error('Post failure: ', error))//TODO---PROPER Error handling
 }
 
 function buildString() {
