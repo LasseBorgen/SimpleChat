@@ -7,7 +7,6 @@ function initPage() {
 }
 
 async function googleLogin() {
-    
     const provider = new firebase.auth.GoogleAuthProvider()
     const user = await firebase.auth().signInWithPopup(provider) //TODO--Try catch
 

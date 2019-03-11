@@ -1,12 +1,9 @@
 let posts = []
-let currentUser
 let userName
 
 function initChat(user) {
-    //const app = firebase.app()
     const db = firebase.firestore()
     const postsCollection = db.collection('posts')
-    currentUser = user //Det kan være, at jeg får brug for den i fremtiden...
     userName = user.user.displayName
 
     postsCollection.onSnapshot(snapshot => { //TODO---Error handling
@@ -36,10 +33,10 @@ function onSubmit(postsCollection) {
             id: postId
         })
         .then(function () {
-            console.log('Booyah!')
+            console.log('Post success!')
         })
         .catch(function (error) { //TODO---PROPER Error handling
-            console.error('Åhh åhhh~: ', error)
+            console.error('Post failure: ', error)
         })
 }
 
