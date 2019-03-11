@@ -45,3 +45,9 @@ If you don't want to host locally, you can also access the product directly by g
 ## Authors
 
 * **Lasse Borgen** - [LasseBorgen](https://github.com/LasseBorgen)
+
+## Bugs and TODOs
+
+When making a post containing an illegal word, the server will first create the post, inform all users about the post, trigger a cloud-function to edit the post and then inform all users again. In the future, creating posts should probably be done through http requests with an attached cloud-function trigger.
+
+No attention has been paid to either design and security in this project.
