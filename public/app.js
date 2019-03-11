@@ -1,4 +1,4 @@
-import Chat from './Chat.js'
+import chat from './chat.js'
 
 onload = initPage
 
@@ -15,6 +15,6 @@ async function googleLogin() {
         fetch('/chat.html')
             .then(response => response.text())
             .then(chatHtml => document.querySelector(".main-container").innerHTML = chatHtml)
-            .then(() => Chat.initChat(user))
+            .then(() => chat.initChat(user))
     }
 }
