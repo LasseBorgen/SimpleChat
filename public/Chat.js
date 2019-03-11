@@ -24,21 +24,21 @@ function initChat(user) {
     })
 
     document.querySelector('#button-submit').addEventListener('click', () => {onSubmit(postsCollection)})
-
+    document.querySelector('#display-name-input').value = userName
 }
 
 function onSubmit(postsCollection) {
     const postId = parseInt(posts[posts.length - 1].id) + 1
     postsCollection.doc('post_' + postId).set({
-            from: currentUser.user.displayName, //TODO---Find den rigtige titel
+            from: document.querySelector('#display-name-input').value,
             content: document.querySelector('#message-input').value,
             id: postId
         })
         .then(function () {
-            console.log("Booyah!")
+            console.log('Booyah!')
         })
         .catch(function (error) {
-            console.error("Åhh åhhh~: ", error)
+            console.error('Åhh åhhh~: ', error)
         })
 }
 
