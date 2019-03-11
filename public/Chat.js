@@ -9,8 +9,9 @@ function initChat(user) {
     currentUser = user //Det kan være, at jeg får brug for den i fremtiden...
     userName = user.user.displayName
 
-    postsCollection.onSnapshot(snapshot => { //TODO---Try-catch
+    postsCollection.onSnapshot(snapshot => { //TODO---Error handling
         posts = []
+        console.log(snapshot.docChanges())
         snapshot.forEach(doc => {
             const data = doc.data()
             posts.push({
@@ -29,7 +30,7 @@ function initChat(user) {
 
 function onSubmit(postsCollection) {
     const postId = parseInt(posts[posts.length - 1].id) + 1
-    postsCollection.doc('post_' + postId).set({
+    postsCollection.doc('post_' + postId).set({ 
             from: document.querySelector('#display-name-input').value,
             content: document.querySelector('#message-input').value,
             id: postId
@@ -37,19 +38,19 @@ function onSubmit(postsCollection) {
         .then(function () {
             console.log('Booyah!')
         })
-        .catch(function (error) {
+        .catch(function (error) { //TODO---PROPER Error handling
             console.error('Åhh åhhh~: ', error)
         })
 }
 
 function buildString() {
-    let thisString = ''
+    let result = ''
 
     for(let post of posts) {
-        thisString += `${post.from}: ${post.content}\n`
+        result += `${post.from}: ${post.content}\n`
     }
 
-    return thisString
+    return result
 }
 
 export default { initChat }
