@@ -1,11 +1,13 @@
 let posts = []
 let currentUser
+let userName
 
 function initChat(user) {
     //const app = firebase.app()
     const db = firebase.firestore()
     const postsCollection = db.collection('posts')
-    currentUser = user
+    currentUser = user //Det kan være, at jeg får brug for den i fremtiden...
+    userName = user.user.displayName
 
     postsCollection.onSnapshot(snapshot => { //TODO---Try-catch
         posts = []
@@ -14,9 +16,10 @@ function initChat(user) {
             posts.push({
                 from: data.from,
                 content: data.content,
-                id: doc._key.path.segments[6]
+                id: data.id
             })
         })
+        posts.sort((a, b) => a.id - b.id)
         document.querySelector('#chatroom').innerHTML = buildString()
     })
 
@@ -25,9 +28,11 @@ function initChat(user) {
 }
 
 function onSubmit(postsCollection) {
-    postsCollection.doc('' + (parseInt(posts[posts.length - 1].id) + 1)).set({
+    const postId = parseInt(posts[posts.length - 1].id) + 1
+    postsCollection.doc('post_' + postId).set({
             from: currentUser.user.displayName, //TODO---Find den rigtige titel
-            content: document.querySelector('#message-input').value
+            content: document.querySelector('#message-input').value,
+            id: postId
         })
         .then(function () {
             console.log("Booyah!")
